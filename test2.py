@@ -21,25 +21,31 @@ def check_xserver():
 		return False
 
 def ask_xserver():
-	choice = input("The script will remove X Windows Server. Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove X Windows Server. Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 def check_avahi():
-	try:
-		subprocess.check_output(["pgrep", "avahi-daemon"])
+	result = os.system("dpkg -l | grep avahi-daemon > /dev/null 2>&1")
+	if result == 0:
 		return True
-	except subprocess.CalledProcessError:
+	else:
 		return False
 
 def ask_avahi():
-	choice = input("The script will remove Avahi Server. Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove Avahi Server. Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 #def check_cups(): #has issues
 #	result = os.system("dpkg -l | grep cups > /dev/null 2>&1")
@@ -56,11 +62,14 @@ def check_dhcp():
 		return False
 
 def ask_dhcp():
-	choice = input("The script will remove DHCP Server. Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove DHCP Server. Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 def check_ldap():
 	result = os.system("dpkg -l | grep slapd > /dev/null 2>&1")
@@ -70,18 +79,31 @@ def check_ldap():
 		return False
 
 def ask_ldap():
-	choice = input("The script will remove Lightweight Directory Access Protocol (LDAP). Do you want to remove it? y/n")
-	if choice.lower() == "y":
+	while True:
+		choice = input("The script will remove Lightweight Directory Access Protocol (LDAP). Do you want to remove it? y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
+
+def check_nfs():
+	result = os.system("dpkg -l | grep nfs-kernel-server > /dev/null 2>&1")
+	if result == 0:
 		return True
 	else:
 		return False
 
-#def check_dns():
-#	result = os.system("dpkg -l | grep bind9 > /dev/null 2>&1")
-#	if result == 0:
-#		return True
-#	else:
-#		return False
+def ask_nfs():
+	while True:
+		choice = input("The script will remove Network File System (NFS). Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 def check_dns():
 	try:
@@ -91,11 +113,14 @@ def check_dns():
 		return False
 
 def ask_dns():
-	choice = input("The script will remove Domain Name Server (DNS). Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove Domain Name Server (DNS). Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 def check_vsftpd():
 	result = os.system("dpkg -l | grep vsftpd > /dev/null 2>&1")
@@ -105,11 +130,14 @@ def check_vsftpd():
 		return False
 
 def ask_vsftpd():
-	choice = input("The script will remove FTP Server. Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove FTP Server. Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 def check_http():
 	try:
@@ -119,11 +147,14 @@ def check_http():
 		return False
 
 def ask_http():
-	choice = input("The script will remove HTTP Server. Do you want to remove it y/n ")
-	if choice.lower() == "y":
-		return True
-	else:
-		return False
+	while True:
+		choice = input("The script will remove HTTP Server. Do you want to remove it y/n ")
+		if choice.lower() == "y":
+			return True
+		elif choice.lower() == "n":
+			return False
+		else:
+			print("Please Enter a Valid Input")
 
 report_head()
 
@@ -170,6 +201,15 @@ if check_ldap():
 		report_file.write("- Lightweight Directory Access Protocol was not removed due to user input\n")
 else:
 	report_file.write("- Lightweight Directory Access Protocol is not installed. No action needed\n")
+
+if check_nfs():
+	if ask_nfs():
+		report_file.write("- Network File System is installed. Proceeding to uninstall\n")
+		subprocess.run(["apt", "purge", "nfs-kernel-server"])
+	else:
+		report_file.write("- Network File System was not removed due to user input\n")
+else:
+	report_file.write("- Network File System is not installed. No action needed\n")
 
 if check_dns():
 	if ask_dns():
