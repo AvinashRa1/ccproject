@@ -161,7 +161,7 @@ report_head()
 if check_xserver():
 	if ask_xserver():
 		report_file.write("- X Windows System is installed. Proceeding to uninstall.\n")
-		#subprocess.run(["apt", "purge", "xserver-xorg*"])
+		os.system("apt purge xserver-xorg*")
 	else:
 		report_file.write("- X Windows was not removed due to user input.\n")
 else:
@@ -170,9 +170,9 @@ else:
 if check_avahi():
 	if ask_avahi():
 		report_file.write("- Avahi Server is installed. Proceeding to uninstall\n")
-		subprocess.run(["systemctl", "stop", "avahi-daemon.service"])
-		subprocess.run(["systemctl", "stop", "avahi-daemon.socket"])
-		subprocess.run(["apt", "purge", "avahi-daemon"])
+		os.system("systemctl stop avahi-daemon.service")
+		os.system("systemctl stop avahi-daemon.socket")
+		os.system("apt purge avahi-daemon")
 	else:
 		report_file.write("- Avahi Server was not removed due to user input.\n")
 else:
@@ -187,7 +187,7 @@ else:
 if check_dhcp():
 	if ask_dhcp():
 		report_file.write("- DHCP Server is installed. Proceeding to uninstall.\n")
-		subprocess.run(["apt", "purge", "isc-dhcp-server"])
+		os.system("apt purge isc-dhcp-server")
 	else:
 		report_file.write("- DHCP Server was not removed due to user input.\n")
 else:
@@ -196,7 +196,7 @@ else:
 if check_ldap():
 	if ask_ldap():
 		report_file.write("- Lightweight Directory Access Protocol is installed. Proceeding to uninstall\n")
-		subprocess.run(["apt", "purge", "slapd"])
+		os.system("apt purge slapd")
 	else:
 		report_file.write("- Lightweight Directory Access Protocol was not removed due to user input\n")
 else:
@@ -205,7 +205,7 @@ else:
 if check_nfs():
 	if ask_nfs():
 		report_file.write("- Network File System is installed. Proceeding to uninstall\n")
-		subprocess.run(["apt", "purge", "nfs-kernel-server"])
+		os.system("apt purge nfs-kernel-server")
 	else:
 		report_file.write("- Network File System was not removed due to user input\n")
 else:
@@ -214,7 +214,7 @@ else:
 if check_dns():
 	if ask_dns():
 		report_file.write("- DNS Server is installed. Proceeding to uninstall.\n")
-		subprocess.run(["apt", "purge", "bind9"])
+		os.system("apt purge bind9")
 	else:
 		report_file.write("- DNS Server was not removed due to user input.\n")
 else:
@@ -223,7 +223,7 @@ else:
 if check_vsftpd():
 	if ask_vsftpd():
 		report_file.write("- FTP Server is installed. Proceeding to uninstall.\n")
-		subprocess.run(["apt", "purge", "vsftpd"])
+		os.system("apt purge vsftpd")
 	else:
 		report_file.write("- FTP Server was not removed due to user input.\n")
 else:
@@ -232,7 +232,7 @@ else:
 if check_http():
 	if ask_http():
 		report_file.write("- HTTP Server is installed. Proceeding to uninstall.\n")
-		subprocess.run(["apt", "purge", "apache2"])
+		os.system("apt purge apache2")
 	else:
 		report_file.write("- HTTP Server was not removed due to user input.\n")
 else:
