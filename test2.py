@@ -9,15 +9,6 @@ from colorama import Style
 
 scan_choice = ""
 
-endpath = os.getcwd() + "/report.txt"
-
-if scan_choice == "1":
-	endpath = os.getcwd() + "/scanReport.txt"
-elif scan_choice == "2":
-	endpath = os.getcwd() + "/scanCompReport.txt"
-
-report_file = open(endpath, "w")
-
 #Function Section
 
 # ================================= Special Services Section ====================================
@@ -40,6 +31,23 @@ def ask_scan_type():
 	print("e - Exit the Script\n")
 	scan_choice = input("Please Enter your choice: ")
 	return scan_choice
+
+def print_scan():
+	while True:
+		ask_scan_type()
+
+print_scan()
+
+# File Generation Section
+
+if scan_choice == "1":
+	endpath = os.getcwd() + "/scanReport.txt"
+elif scan_choice == "2":
+	endpath = os.getcwd() + "/scanCompReport.txt"
+
+report_file = open(endpath, "w")
+
+# End of File Generation Section
 
 def services_report_head():
 	report_file.write("\n")
@@ -848,9 +856,7 @@ def scan_option():
 			print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
 
 def scan_type():
-	while True:
-		choice = ask_scan_type()
-		if choice == "1":
+		if scan_choice == "1":
 			while True:
 				conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
@@ -862,7 +868,7 @@ def scan_type():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif choice == "2":
+		elif scan_choice == "2":
 			while True:
 				conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
@@ -874,7 +880,7 @@ def scan_type():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif choice.lower() == "e":
+		elif scan_choice.lower() == "e":
 			print("\nYou have exited the script :( \n")
 			return True
 		else:
