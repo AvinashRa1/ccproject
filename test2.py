@@ -7,8 +7,8 @@ from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 
-scan_endpath = os.getcwd() + "services/scanReport.txt"
-comp_endpath = os.getcwd() + "services/compReport.txt"
+scan_endpath = os.getcwd() + "/scanReport.txt"
+comp_endpath = os.getcwd() + "/compReport.txt"
 
 report_file = open(comp_endpath, "w")
 scan_report_file = open(scan_endpath, "w")
@@ -42,9 +42,19 @@ def services_report_head():
 	report_file.write("                                  Services Compliance                               \n")
 	report_file.write("====================================================================================\n")
 
+def scan_services_report_head():
+	scan_report_file.write("\n")
+	scan_report_file.write("====================================================================================\n")
+	scan_report_file.write("                                  Services Scan                                     \n")
+	scan_report_file.write("====================================================================================\n")
+
 def services_output_head():
 	print(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
 	report_file.write(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
+
+def scan_services_output_head():
+	print(f"{Fore.RED}=============================== Services Scan =============================={Style.RESET_ALL}\n")
+	scan_report_file.write(f"{Fore.RED}=============================== Services Scan =============================={Style.RESET_ALL}\n")
 
 def runningservices_output_head():
 	print(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
@@ -657,8 +667,21 @@ def check_non_services():
 		print(f"Error running command: {result.stderr}")
 	print("\n")
 
-def report_int():
-	print(f"{Fore.RED} = Please Use the Command 'cat report.txt | less' when viewing the report! = {Style.RESET_ALL}\n")
+def check_non_services_scan():
+	command = "ss -ltr"
+	result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, text=True)
+
+	if result.returncode == 0:
+		lines = result.stdout.splitlines()
+
+		print(lines[0])
+
+		for index, line in enumerate(lines[1:], start=1):
+			print(f"Index {index}: {line}")
+			scan_report_file.write(f"Index {index}: {line}\n")
+	else:
+		print(f"Error running command: {result.stderr}")
+	print("\n")
 
 # ==================================== Firewall Configuration Section ==============================
 
@@ -667,8 +690,8 @@ def report_int():
 # ============================================ Main Functions ======================================
 
 def scan_actions():
-	services_report_head()
-	services_output_head()
+	scan_services_report_head()
+	scan_services_output_head()
 	time.sleep(1)
 	scan_xserver()
 	time.sleep(1)
@@ -761,16 +784,19 @@ def running_services_action():
 	time.sleep(1)
 	check_non_services()
 
+def scan_running_services_action():
+	runningservices_output_head()
+	time.sleep(1)
+	check_non_services_scan()
+
 def services_purge_main():
 	purge_actions()
 	running_services_action()
-	report_int()
 	report_file.write("\n")
 
 def services_scan_main():
 	scan_actions()
-	running_services_action()
-	report_int()
+	scan_running_services_action()
 	report_file.write("\n")
 
 def option():
