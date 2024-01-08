@@ -7,8 +7,11 @@ from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 
-scan_choice = ""
-endpath = ""
+scan_endpath = os.getcwd() + "services/scanReport.txt"
+comp_endpath = os.getcwd() + "services/compReport.txt"
+
+report_file = open(comp_endpath, "w")
+scan_report_file = open(scan_endpath, "w")
 
 #Function Section
 
@@ -30,25 +33,8 @@ def ask_scan_type():
 	print("1 - Scan only if the system is Compliant.\n")
 	print("2 - Conduct the Scan and make changes.\n")
 	print("e - Exit the Script\n")
-	scan_choice = input("Please Enter your choice: ")
-	return scan_choice
-
-def print_scan():
-	while True:
-		ask_scan_type()
-		if scan_choice == "1":
-			endpath = os.getcwd() + "/scanReport.txt"
-		elif scan_choice == "2":
-			endpath = os.getcwd() + "/scanCompReport.txt"
-		return scan_choice
-
-print_scan()
-
-# File Generation Section
-
-report_file = open(endpath, "w")
-
-# End of File Generation Section
+	choice = input("Please Enter your choice: ")
+	return choice
 
 def services_report_head():
 	report_file.write("\n")
@@ -58,6 +44,7 @@ def services_report_head():
 
 def services_output_head():
 	print(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
+	report_file.write(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
 
 def runningservices_output_head():
 	print(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
@@ -192,162 +179,162 @@ def check_rsync():
 def scan_xserver():
 	if check_xserver():
 		print(f"- X Windows System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- X Windows System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- X Windows System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- X Windows System is not installed. No action is needed.\n")
-		report_file.write("\n- X Windows Systtem is not install. No action is needed.\n")
+		scan_report_file.write("\n- X Windows Systtem is not install. No action is needed.\n")
 
 def scan_avahi():
 	if check_avahi():
 		print(f"- Avahi Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Avahi Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Avahi Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Avahi Server is not installed. No action is needed.\n")
-		report_file.write("\n- Avahi Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Avahi Server is not installed. No action is needed.\n")
 
 def scan_dhcp():
 	if check_dhcp():
 		print(f"- DHCP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- DHCP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- DHCP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- DHCP Server is not installed. No action is needed.\n")
-		report_file.write("\n- DHCP Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- DHCP Server is not installed. No action is needed.\n")
 	
 def scan_ldap():
 	if check_ldap():
 		print(f"- Lightweight Directory Access Protocol is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Lightweight Directory Access Protocol is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Lightweight Directory Access Protocol is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Lightweight Directory Access Protocol is not installed. No action is needed.\n")
-		report_file.write("\n- Lightweight Directory Access Protocol is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Lightweight Directory Access Protocol is not installed. No action is needed.\n")
 
 def scan_nfs():
 	if check_nfs():
 		print(f"- Network File System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Network File System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Network File System is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Network File System is not installed. No action is needed.\n")
-		report_file.write("\n- Network File System is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Network File System is not installed. No action is needed.\n")
 
 def scan_dns():
 	if check_dns():
 		print(f"- DNS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- DNS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- DNS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- DNS Server is not installed. No action is needed.\n")
-		report_file.write("\n- DNS Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- DNS Server is not installed. No action is needed.\n")
 
 def scan_vsftpd():
 	if check_vsftpd():
 		print(f"- FTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- FTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- FTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- FTP Server is not installed. No action is needed.\n")
-		report_file.write("\n- FTP Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- FTP Server is not installed. No action is needed.\n")
 
 def scan_http():
 	if check_http():
 		print(f"- HTTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- HTTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- HTTP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- HTTP Server is not installed. No action is needed.\n")
-		report_file.write("\n- HTTP Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- HTTP Server is not installed. No action is needed.\n")
 
 def scan_imap_pop3():
 	if check_imap_pop3():
 		print(f"- IMAP and POP3 is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- IMAP and POP3 is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- IMAP and POP3 is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- IMAP and POP3 is not installed. No action is needed.\n")
-		report_file.write("\n- IMAP and POP3 is not installed. No action is needed.\n")
+		scan_report_file.write("\n- IMAP and POP3 is not installed. No action is needed.\n")
 
 def scan_samba():
 	if check_samba():
 		print(f"- Samba Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Samba Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Samba Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Samba Server is not installed. No action is needed.\n")
-		report_file.write("\n- Samba Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Samba Server is not installed. No action is needed.\n")
 
 def scan_squid():
 	if check_squid():
 		print(f"- HTTP Proxy Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- HTTP Proxy Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- HTTP Proxy Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- HTTP Proxy Server is not installed. No action is needed.\n")
-		report_file.write("\n- HTTP Proxy Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- HTTP Proxy Server is not installed. No action is needed.\n")
 
 def scan_snmp():
 	if check_snmp():
 		print(f"- SNMP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- SNMP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- SNMP Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- SNMP Server is not installed. No action is needed.\n")
-		report_file.write("\n- SNMP Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- SNMP Server is not installed. No action is needed.\n")
 
 def scan_nis():
 	if check_nis():
 		print(f"- NIS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- NIS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- NIS Server is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- NIS Server is not installed. No action is needed.\n")
-		report_file.write("\n- NIS Server is not installed. No action is needed.\n")
+		scan_report_file.write("\n- NIS Server is not installed. No action is needed.\n")
 
 def scan_dnsmasq():
 	if check_dnsmasq():
 		print(f"- DNSMASQ is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- DNSMASQ is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- DNSMASQ is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- DNSMASQ is not installed. No action is needed.\n")
-		report_file.write("\n- DNSMASQ is not installed. No action is needed.\n")
+		scan_report_file.write("\n- DNSMASQ is not installed. No action is needed.\n")
 
 def scan_rsync():
 	if check_rsync():
 		print(f"- Rsync is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Rsync is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Rsync is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Rsync is not installed. No action is needed.\n")
-		report_file.write("\n- Rsync is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Rsync is not installed. No action is needed.\n")
 
 def scan_rsh():
 	if check_rsh():
 		print(f"- Rsh Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Rsh Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Rsh Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Rsh Client is not installed. No action is needed.\n")
-		report_file.write("\n- Rsh Client is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Rsh Client is not installed. No action is needed.\n")
 
 def scan_talk():
 	if check_talk():
 		print(f"- Talk Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Talk Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Talk Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Talk Client is not installed. No action is needed.\n")
-		report_file.write("\n- Talk Client is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Talk Client is not installed. No action is needed.\n")
 
 def scan_telnet():
 	if check_telnet():
 		print(f"- Telnet Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- Telnet Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- Telnet Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- Telnet Client is not installed. No action is needed.\n")
-		report_file.write("\n- Telnet Client is not installed. No action is needed.\n")
+		scan_report_file.write("\n- Telnet Client is not installed. No action is needed.\n")
 
 def scan_ldap_utils():
 	if check_ldap_utils():
 		print(f"- LDAP Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- LDAP Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- LDAP Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- LDAP Client is not installed. No action is needed.\n")
-		report_file.write("\n- LDAP Client is not installed. No action is needed.\n")
+		scan_report_file.write("\n- LDAP Client is not installed. No action is needed.\n")
 
 def scan_rpcbind():
 	if check_rpcbind():
 		print(f"- RPC Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
-		report_file.write(f"\n- RPC Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
+		scan_report_file.write(f"\n- RPC Client is installed.{Fore.RED} Please Uninstall it.{Style.RESET_ALL}\n")
 	else:
 		print("- RPC Client is not installed. No action is needed.\n")
-		report_file.write("\n- RPC Client is not installed. No action is needed.\n")
+		scan_report_file.write("\n- RPC Client is not installed. No action is needed.\n")
 
 # ======================================= Service Purge Functions =================================
 
@@ -807,7 +794,7 @@ def option():
 				if conf_choice.lower() == "y":
 					print("\nYou have chosen Firewall Scan. Proceeding with scan.../n")
 
-					#Firewall Config Main goes here
+					#Firewall Main goes here
 
 					return True
 				elif conf_choice.lower() == "n":
@@ -857,7 +844,9 @@ def scan_option():
 			print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
 
 def scan_type():
-		if scan_choice == "1":
+	while True:
+		choice = ask_scan_type()
+		if choice == "1":
 			while True:
 				conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
@@ -869,7 +858,7 @@ def scan_type():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif scan_choice == "2":
+		elif choice == "2":
 			while True:
 				conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
@@ -881,7 +870,7 @@ def scan_type():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif scan_choice.lower() == "e":
+		elif choice.lower() == "e":
 			print("\nYou have exited the script :( \n")
 			return True
 		else:
