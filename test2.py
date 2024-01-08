@@ -7,8 +7,7 @@ from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 
-endpath = ""
-report_file = open(endpath, "w")
+scan_choice = 0
 
 #Function Section
 
@@ -30,8 +29,15 @@ def ask_scan_type():
 	print("1 - Scan only if the system is Compliant.\n")
 	print("2 - Conduct the Scan and make changes.\n")
 	print("e - Exit the Script\n")
-	choice = input("Please Enter your choice: ")
-	return choice
+	scan_choice = input("Please Enter your choice: ")
+	return scan_choice
+
+if scan_choice == "1":
+	endpath = os.getcwd() + "/scanReport.txt"
+elif scan_choice == "2":
+	endpath = os.getcwd() + "/report.txt"
+
+report_file = open(endpath, "w")
 
 def services_report_head():
 	report_file.write("\n")
@@ -815,7 +821,6 @@ def scan_type():
 				conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
 					print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
-					endpath = os.getcwd() + "/scanReport.txt"
 					services_scan_main()
 					return True
 				elif conf_choice.lower() == "n":
@@ -828,7 +833,6 @@ def scan_type():
 				conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
 					print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
-					endpath = os.getcwd() + "/report.txt"
 					option()
 					return True
 				elif conf_choice.lower() == "n":
