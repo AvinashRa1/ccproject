@@ -8,6 +8,7 @@ from colorama import Fore
 from colorama import Style
 
 scan_choice = ""
+endpath = ""
 
 #Function Section
 
@@ -35,15 +36,15 @@ def ask_scan_type():
 def print_scan():
 	while True:
 		ask_scan_type()
+		if scan_choice == "1":
+			endpath = os.getcwd() + "/scanReport.txt"
+		elif scan_choice == "2":
+			endpath = os.getcwd() + "/scanCompReport.txt"
+		return scan_choice
 
 print_scan()
 
 # File Generation Section
-
-if scan_choice == "1":
-	endpath = os.getcwd() + "/scanReport.txt"
-elif scan_choice == "2":
-	endpath = os.getcwd() + "/scanCompReport.txt"
 
 report_file = open(endpath, "w")
 
