@@ -7,7 +7,15 @@ from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 
+scan_choice = ""
+
 endpath = os.getcwd() + "/report.txt"
+
+if scan_choice == "1":
+	endpath = os.getcwd() + "/scanReport.txt"
+elif scan_choice == "2":
+	endpath = os.getcwd() + "/scanCompReport.txt"
+
 report_file = open(endpath, "w")
 
 #Function Section
@@ -30,8 +38,8 @@ def ask_scan_type():
 	print("1 - Scan only if the system is Compliant.\n")
 	print("2 - Conduct the Scan and make changes.\n")
 	print("e - Exit the Script\n")
-	choice = input("Please Enter your choice: ")
-	return choice
+	scan_choice = input("Please Enter your choice: ")
+	return scan_choice
 
 def services_report_head():
 	report_file.write("\n")
@@ -41,7 +49,6 @@ def services_report_head():
 
 def services_output_head():
 	print(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
-	report_file.write(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
 
 def runningservices_output_head():
 	print(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
