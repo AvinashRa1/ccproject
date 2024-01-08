@@ -791,7 +791,42 @@ def option():
 				if conf_choice.lower() == "y":
 					print("\nYou have chosen Firewall Scan. Proceeding with scan.../n")
 
-					#Firewall Main goes here
+					#Firewall Config Main goes here
+
+					return True
+				elif conf_choice.lower() == "n":
+					print("\n You have canceled your action.\n")
+					return False
+				else:
+					print("\nPLEASE ENTER A VALID INPUT")
+		elif choice.lower() == "e":
+			print("\nYou have exited the script :( \n")
+			return True
+		else:
+			print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
+
+def scan_option():
+	while True:
+		choice = ask_choice()
+		if choice == "1":
+			while True:
+				conf_choice = input("\nYou have chosen Special Services. Are you Sure? y/n ")
+				if conf_choice.lower() == "y":
+					print("\nYou have chosen Special Services Scan. Proceeding with scan...\n")
+					services_scan_main()
+					return True
+				elif conf_choice.lower() == "n":
+					print("\nYou have canceled your action.\n")
+					return False
+				else:
+					print("\nPLEASE ENTER A VALID INPUT")
+		elif choice == "2":
+			while True:
+				conf_choice = input("\nYou have chosen Firewall. Are you sure? y/n ")
+				if conf_choice.lower() == "y":
+					print("\nYou have chosen Firewall Scan. Proceeding with scan.../n")
+
+					#Firewall Scan Main goes here
 
 					return True
 				elif conf_choice.lower() == "n":
@@ -813,7 +848,7 @@ def scan_type():
 				conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
 				if conf_choice.lower() == "y":
 					print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
-					services_scan_main()
+					scan_option()
 					return True
 				elif conf_choice.lower() == "n":
 					print("\nYou have canceled your action.\n")
