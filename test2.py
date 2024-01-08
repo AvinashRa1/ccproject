@@ -7,7 +7,8 @@ from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
 
-scan_choice = 0
+endpath = os.getcwd() + "/report.txt"
+report_file = open(endpath, "w")
 
 #Function Section
 
@@ -29,15 +30,8 @@ def ask_scan_type():
 	print("1 - Scan only if the system is Compliant.\n")
 	print("2 - Conduct the Scan and make changes.\n")
 	print("e - Exit the Script\n")
-	scan_choice = input("Please Enter your choice: ")
-	return scan_choice
-
-if scan_choice == "1":
-	endpath = os.getcwd() + "/scanReport.txt"
-elif scan_choice == "2":
-	endpath = os.getcwd() + "/report.txt"
-
-report_file = open(endpath, "w")
+	choice = input("Please Enter your choice: ")
+	return choice
 
 def services_report_head():
 	report_file.write("\n")
@@ -791,7 +785,6 @@ def option():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT")
-			return True
 		elif choice == "2":
 			while True:
 				conf_choice = input("\nYou have chosen Firewall. Are you sure? y/n ")
@@ -806,7 +799,6 @@ def option():
 					return False
 				else:
 					print("\nPLEASE ENTER A VALID INPUT")
-			return True
 		elif choice.lower() == "e":
 			print("\nYou have exited the script :( \n")
 			return True
