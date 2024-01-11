@@ -67,9 +67,8 @@ def ask_choice():
 def ask_scan_type():
 	print("\n================================== SCAN TYPE =====================================\n")
 	print(f"{Fore.RED}== Please Choose one of the following scans that you wish to conduct! =={Style.RESET_ALL}\n")
-	print("1 - All Benchmark Scan.\n")
-	print("2 - Scan only if the system is Compliant.\n")
-	print("3 - Conduct the Scan and make changes.\n")
+	print("1 - Scan only if the system is Compliant.\n")
+	print("2 - Conduct the Scan and make changes.\n")
 	print("e - Exit the Script\n")
 	choice = input("Please Enter your choice: ")
 	return choice
