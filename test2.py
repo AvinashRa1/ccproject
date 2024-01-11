@@ -50,19 +50,21 @@ def scan_services_report_head():
 
 def services_output_head():
 	print(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
-	report_file.write(f"{Fore.RED}=============================== Services Compliance =============================={Style.RESET_ALL}\n")
 
 def scan_services_output_head():
 	print(f"{Fore.RED}=============================== Services Scan =============================={Style.RESET_ALL}\n")
-	scan_report_file.write(f"{Fore.RED}=============================== Services Scan =============================={Style.RESET_ALL}\n")
 
 def runningservices_output_head():
 	print(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
 	report_file.write(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
 
+def scan_runningservices_output_head():
+	print(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
+	scan_report_file.write(f"\n{Fore.RED}================================ Running Services =============================={Style.RESET_ALL}\n")
+
 def ask(name):
 	while True:
-		choice = input("The script will remove " + str(name) + " . Do you want to remove it y/n ")
+		choice = input(f"The script will remove {Fore.RED} " + str(name) + f"{Style.RESET_ALL} . Do you want to remove it y/n ")
 		if choice.lower() == "y":
 			return True
 		elif choice.lower() == "n":
@@ -785,7 +787,7 @@ def running_services_action():
 	check_non_services()
 
 def scan_running_services_action():
-	runningservices_output_head()
+	scan_runningservices_output_head()
 	time.sleep(1)
 	check_non_services_scan()
 
