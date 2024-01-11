@@ -1680,29 +1680,29 @@ def scan_type():
 	banner()
 	choice = ask_scan_type()
 	if choice == "1":
-		while True:
-			conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
-			if conf_choice.lower() == "y":
-				print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
-				scan_option()
-				return True
-			elif conf_choice.lower() == "n":
-				print("\nYou have canceled your action.\n")
-				return False
-			else:
-				print("\nPLEASE ENTER A VALID INPUT\n")
+		conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
+		if conf_choice.lower() == "y":
+			print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
+			scan_option()
+			return True
+		elif conf_choice.lower() == "n":
+			print("\nYou have canceled your action.\n")
+			scan_type()
+		else:
+			print("\nPLEASE ENTER A VALID INPUT\n")
+			scan_type()
 	elif choice == "2":
-		while True:
-			conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
-			if conf_choice.lower() == "y":
-				print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
-				option()
-				return True
-			elif conf_choice.lower() == "n":
-				print("\nYou have canceled your action.\n")
-				return False
-			else:
-				print("\nPLEASE ENTER A VALID INPUT\n")
+		conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
+		if conf_choice.lower() == "y":
+			print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
+			option()
+			return True
+		elif conf_choice.lower() == "n":
+			print("\nYou have canceled your action.\n")
+			scan_type()
+		else:
+			print("\nPLEASE ENTER A VALID INPUT\n")
+			scan_type()
 	elif choice.lower() == "e":
 		print("\nYou have exited the script :( \n")
 		return True
