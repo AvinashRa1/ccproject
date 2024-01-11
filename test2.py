@@ -1658,7 +1658,7 @@ def option():
 def scan_option():
 	choice = ask_choice()
 	if choice == "1":
-		conf_choice = input("You have Chosen an All Benchmark Scan. Are you Sure? y/n ")
+		conf_choice = input("\nYou have Chosen an All Benchmark Scan. Are you Sure? y/n ")
 		if conf_choice.lower() == "y":
 			print("\nYou have chosen an All Benchmark Scan. Proceeding with scan...\n")
 			services_scan_main()
@@ -1713,9 +1713,9 @@ def scan_type():
 			print("\nPLEASE ENTER A VALID INPUT\n")
 			scan_type()
 	elif choice == "2":
-		conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
+		conf_choice = input("\nYou have chosen the Compliance and Configuration Scan. Are you Sure? y/n ")
 		if conf_choice.lower() == "y":
-			print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
+			print("\nYou have chosen the Compliance and Configuration Scan. Proceeding with scan...\n")
 			option()
 		elif conf_choice.lower() == "n":
 			print("\nYou have canceled your action.\n")
