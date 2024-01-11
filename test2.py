@@ -12,8 +12,8 @@ from colorama import Style
 scan_endpath = os.getcwd() + "/scanReport.txt"
 comp_endpath = os.getcwd() + "/compReport.txt"
 
-report_file = open(comp_endpath, "w")
 scan_report_file = open(scan_endpath, "w")
+report_file = open(comp_endpath, "w")
 
 #Function Section
 
@@ -1600,7 +1600,6 @@ def services_scan_main():
 
 def firewall_main():
     try:
-        banner()
         log_setup()
         scan_or_config()
         log_options()
@@ -1678,37 +1677,38 @@ def scan_option():
 			print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
 
 def scan_type():
-	while True:
-		choice = ask_scan_type()
-		if choice == "1":
-			while True:
-				conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
-				if conf_choice.lower() == "y":
-					print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
-					scan_option()
-					return True
-				elif conf_choice.lower() == "n":
-					print("\nYou have canceled your action.\n")
-					return False
-				else:
-					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif choice == "2":
-			while True:
-				conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
-				if conf_choice.lower() == "y":
-					print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
-					option()
-					return True
-				elif conf_choice.lower() == "n":
-					print("\nYou have canceled your action.\n")
-					return False
-				else:
-					print("\nPLEASE ENTER A VALID INPUT\n")
-		elif choice.lower() == "e":
-			print("\nYou have exited the script :( \n")
-			return True
-		else:
-			print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
+	banner()
+	choice = ask_scan_type()
+	if choice == "1":
+		while True:
+			conf_choice = input("\nYou have chosen only the Compliance Scan. Are you Sure? y/n ")
+			if conf_choice.lower() == "y":
+				print("\nYou have chosen the Compliance Scan. Proceeding with scan...\n")
+				scan_option()
+				return True
+			elif conf_choice.lower() == "n":
+				print("\nYou have canceled your action.\n")
+				return False
+			else:
+				print("\nPLEASE ENTER A VALID INPUT\n")
+	elif choice == "2":
+		while True:
+			conf_choice = input("\nYou have chosen only the Practical Scan. Are you Sure? y/n ")
+			if conf_choice.lower() == "y":
+				print("\nYou have chosen the Practical Scan. Proceeding with scan...\n")
+				option()
+				return True
+			elif conf_choice.lower() == "n":
+				print("\nYou have canceled your action.\n")
+				return False
+			else:
+				print("\nPLEASE ENTER A VALID INPUT\n")
+	elif choice.lower() == "e":
+		print("\nYou have exited the script :( \n")
+		return True
+	else:
+		print(f"{Fore.RED}PLEASE ENTER A VALID INPUT.{Style.RESET_ALL}\n")
+		scan_type()
 
 
 scan_type()
