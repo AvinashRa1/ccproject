@@ -70,7 +70,6 @@ def ask_scan_type():
 	print("1 - All Benchmark Scan.\n")
 	print("2 - Scan only if the system is Compliant.\n")
 	print("3 - Conduct the Scan and make changes.\n")
-	print("b - Go Back.\n")
 	print("e - Exit the Script\n")
 	choice = input("Please Enter your choice: ")
 	return choice
